@@ -1,0 +1,10 @@
+{%extends "plantilla.html"%}
+{%block container%}
+<h1>Gracias por ingresar {{nombre}} </h1>
+
+<form action="" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button type="submit" class="btn btn-primary">Guardar</button>
+			</form>
+{%endblock%}

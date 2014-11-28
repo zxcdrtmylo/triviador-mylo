@@ -1,0 +1,8 @@
+{%extends "plantilla.html"%}
+{%block container%}
+Agregar Preguntas
+<form action="" method="POST">
+	{{form.as_ul}}
+	{%csrf_token%}
+	<input type="submit" value"Enviar">
+</form>
