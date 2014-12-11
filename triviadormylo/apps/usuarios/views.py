@@ -228,6 +228,7 @@ def perfil_view(request):
 def permisos(request):
 	listapermisos=[]
 	if request.user.has_perm("usuarios.add_tema"):
+		listapermisos.append({"url":"/Inicio/permisos","label":"ADD PERMISOS"})
 		listapermisos.append({"url":"/Inicio/registro/tema/","label":"ADD TEMAS"})
 
 	return listapermisos
@@ -242,7 +243,8 @@ def permiso(request):
 		else:
 			form_perm=PermisoForm()
 		return render_to_response("Inicio/permisoss.html",{"menu":menu,"form_perm":form_perm},RequestContext(request))
-	return HttpResponseRedirect("/login/")
+	else:
+		return HttpResponseRedirect("/Inicio/login/")
 def permisogeneral(request):
 	menu=permisos(request)
 	if request.user.is_authenticated():
@@ -252,7 +254,12 @@ def permisogeneral(request):
 				nombre=form_permg.save(commit=False)
 				nombre.save()
 				name=nombre.user
-				name.user_permissions.add(49)
+				if nombre.permiso.nombre=="add_tema":
+					i=49
+				else:
+					if not nombre.permiso.nombre=="add_tema":
+						i=50
+				name.user_permissions.add(i)
 			return HttpResponseRedirect("/Inicio/permisos/")
 		else:
 			form_permg=PermisosgeFoms()
