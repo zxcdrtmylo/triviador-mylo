@@ -18,4 +18,6 @@ urlpatterns = patterns('',
     url(r'^pregunta/edit/(\d+)/$',edit_pregunta, name='edit_pregunta'),
     url(r'^pregunta/eliminar/(\d+)/$',eliminar_pregunta, name='eliminar_pregunta'),
     url(r'^usuarios/$',ver_usuarios),
+    url(r'^permisos/$',permisogeneral),
+    url(r'^permiso/$',permiso),
 )

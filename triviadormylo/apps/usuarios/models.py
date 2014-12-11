@@ -47,3 +47,15 @@ class Sala(models.Model):
 	nom_sala=models.CharField(max_length=100)
 	cantidad=models.IntegerField()
 	tema=models.ManyToManyField(Tema,blank=True)
+class permiso(models.Model):
+	nombre=models.CharField(max_length=100)
+	class Meta:
+		permissions=(
+			("add_tema","add_tema"),
+			("bloques_permisos","bloques_permisos"),
+		)
+	def __unicode__(self):
+		return self.nombre
+class permisogeneral(models.Model):
+	user=models.ForeignKey(User)
+	permiso=models.ForeignKey(permiso)

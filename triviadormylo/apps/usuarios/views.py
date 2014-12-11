@@ -56,8 +56,6 @@ def ver_usuarios(request):
 	menu=permisos(request)
 	if request.user.is_authenticated():
 		usuarios=User.objects.all()
-		#tema=Tema.objects.get(id=int(id))
-		#preguntas=Pregunta.objects.filter(tema=tema)
 		datos={'usuarios':usuarios,'menu':menu}
 		return render_to_response("Inicio/usuarios.html",datos,context_instance=RequestContext(request))
 	else:
@@ -231,5 +229,32 @@ def permisos(request):
 	listapermisos=[]
 	if request.user.has_perm("usuarios.add_tema"):
 		listapermisos.append({"url":"/Inicio/registro/tema/","label":"ADD TEMAS"})
-		
+
 	return listapermisos
+def permiso(request):
+	menu=permisos(request)
+	if request.user.is_authenticated():
+		if request.method=="POST":
+			form_perm=PermisoForm(request.POST)
+			if form_perm.is_valid():
+				form_perm.save()
+			return HttpResponseRedirect("/Inicio/permiso/")
+		else:
+			form_perm=PermisoForm()
+		return render_to_response("Inicio/permisoss.html",{"menu":menu,"form_perm":form_perm},RequestContext(request))
+	return HttpResponseRedirect("/login/")
+def permisogeneral(request):
+	menu=permisos(request)
+	if request.user.is_authenticated():
+		if request.method=="POST":
+			form_permg=PermisosgeFoms(request.POST)
+			if form_permg.is_valid():
+				nombre=form_permg.save(commit=False)
+				nombre.save()
+				name=nombre.user
+				name.user_permissions.add(49)
+			return HttpResponseRedirect("/Inicio/permisos/")
+		else:
+			form_permg=PermisosgeFoms()
+		return render_to_response("Inicio/permisos.html",{"menu":menu,"form_permg":form_permg},RequestContext(request))
+	return HttpResponseRedirect("/Inicio/login/")
