@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from triviadormylo.apps.usuarios.views import pagina_principal
+from triviadormylo.apps.usuarios.views import *
 from django.conf import settings
 
 urlpatterns = patterns('',

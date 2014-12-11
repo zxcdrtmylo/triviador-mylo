@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'triviadormylo.apps.usuarios',
+    'captcha',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -59,8 +60,12 @@ WSGI_APPLICATION = 'triviadormylo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'localhost',
+        'NAME': 'trivia',
+        'PORT':'3306',
+        'USER':'root',
+        'PASSWORD':'',
     }
 }
 
@@ -86,3 +91,6 @@ MEDIA_URL = '/media/'
 TEMPLATE_DIRS = (os.path.join(RUTA_PROYECTO,"plantillas"),)
 STATICFILES_DIRS = (os.path.join(RUTA_PROYECTO,"static"),)
 MEDIA_ROOT=os.path.join(RUTA_PROYECTO,'media')
+
+RECAPTCHA_PUBLIC_KEY = '6LeSnP4SAAAAAMRfhUHi5Vwg0TOL4vbl4-zMt73Y'
+RECAPTCHA_PRIVATE_KEY = '6LeSnP4SAAAAAF8DYqSMfeXin6o00V0LMLbAoSTX'

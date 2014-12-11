@@ -1,9 +1,59 @@
-{%extends "plantilla.html"%}
-{%block container%}
-<h1>Login</h1>
-<form action="" method="post">
-	{{form.as_ul}}
-	{%csrf_token%}
-	<input type="submit" value="Enviar">
-</form>
-{%endblock%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="/static/stilo1.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+</head>
+<body>
+	<div id="titulo">TRIVIADOR DOTA</div>
+	<div id="contenedor">
+		<div id="cabecera">
+			<ul class="nav nav-tabs nav-justified">
+  				<li role="presentation" ><a href="http://es.dota2.com/">HACERCA DE DOTA</a></li>  				
+  			  	<li role="presentation" ><a href="/Inicio/">REGISTRATE</a></li>
+			</ul>
+		</div>
+		<div>
+			{%if esta%}
+				<div class="alert alert-danger" role="alert">{{mensaje}}</div>
+			{%endif%}
+			<div class="jumbotron pp">
+			  <h1>Hola, Gente!!!</h1>
+			  <h3>¿Por qué tengo que iniciar sesión?</h3>
+			  <p>Triviador Dota para web prueva cuanto sabes de dota para lo que le solicitamos que inicie sesión en primer lugar.
+				Se trata de una cuenta registrada o usada para iniciar sesión en los servicios de Triviador. Si utiliza lo siguiente, ya dispone de una cuenta de Trivia: Nick(ejemplo_mamerto o ejemplo_remberto) Si no tienes cuenta registrate facil en <a href="/Inicio/">REGISTRATE</a> gratis!!! :D Tras iniciar sesión en Triviador Dota, te sumerges en un mundo lleno de aventura!!</p>
+				<p>Ingresa y participa del mejor juego de preguntas de dota!!!</p>
+			</div>
+			{%if estado%}
+				<div class="alert alert-danger" role="alert">{{mensaje}}<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span><span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span></div>
+			{%endif%}
+			<form action="" method="post" class="form" id="formulario">
+			  	<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						{{form.as_p}}
+						{%csrf_token%}
+					</div>
+			  	</div>
+			  	<div class="form-group">
+			  		<div class="col-sm-offset-2 col-sm-10">
+			  			{{form2.as_p}}
+			  		</div>
+			  	</div>
+				<div class="col-sm-offset-2 col-sm-10">
+		    		<div class="checkbox">
+			    		<label>
+			          		<input type="checkbox"> Acuérdate de mí
+			        	</label>
+		      		</div>
+		   		</div>
+				<button type="submit" class="btn btn-primary btn-lg btn-block">INICIAR SESION</button>
+			</form>
+		</div>
+	</div>
+	<script src="{{STATIC_URL}}js/jquery-2.1.0.min.js"></script>
+	<script src="{{STATIC_URL}}js/bootstrap.min.js" ></script>
+</body>
+</html>

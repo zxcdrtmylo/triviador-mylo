@@ -1,8 +1,55 @@
-{%extends "plantilla.html"%}
-{%block container%}
-<h1>Gracias por ingresar {{nombre}} </h1>
-
-	<img src="/media/{{ user.perfil.avatar}}" alt="avatar">
-	<img src="{{ user.perfil.avatar.url_50x50}}" alt="avatar">
-	<img src="{{ user.perfil.avatar.url_200x200}}" alt="avatar">
-{%endblock%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Perfil</title>
+	<link rel="stylesheet" type="text/css" href="/static/stilo1.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+</head>
+<body>
+	<div id="titulo">TRIVIADOR DOTA<img src="{{ user.perfil.avatar.url_100x100}}" alt="avatar" align="right" class="img-circle"></div>
+	<div id="contenedor">
+		<div id="cabecera">
+			<ul class="nav nav-tabs nav-justified">
+  				<li role="presentation" ><a href="http://es.dota2.com/">HACERCA DE DOTA</a></li>
+  				<li role="presentacion" ><a href="/Inicio/juego/">EMPESAR A JUGAR</a></li>
+				<li role="presentation" class="dropdown">
+				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+				    	MENU<span class="caret"></span>
+				    </a>
+				    <ul class="dropdown-menu" role="menu">
+				    	<li role="presentation" ><a href="#">EVENTOS</a></li>
+  						<li role="presentation" ><a href="#">TUTORIALES</a></li>
+			  			<li role="presentation" ><a href="/Inicio/perfil/add/">EDITAR PERFIL</a></li>
+			  			{% if not user.is_anonymous %}
+							<li role="presentation"><a href="/Inicio/logout/">{{user}} CERRAR SESION</a></li>
+						{% endif %}
+				    </ul>
+				</li>
+			</ul>
+		</div>
+		<div id="perfil">
+			<div class="row">
+			  <div class="col-sm-6 col-md-4">
+			    <div class="thumbnail">
+			      <img data-src="holder.js/300x300" alt="..." src="{{ user.perfil.avatar.url_200x200}}" class="img-thumbnail">
+			      <!--<img data-src="holder.js/300x300" alt="..." src="/media/{{ user.perfil.avatar}}">-->
+			      <div class="caption" align="center">
+			        <h3 align="center">TU PERFIL</h3>
+			        <p>-->Eres del pais {{user.perfil.pais}}</p>
+			        <p>-->De la ciudad {{user.perfil.ciudad}}</p>
+			        <p>-->Tu pasa Tiempo es {{user.perfil.pasatiempo}}</p>
+			        <p>-->El color que te gusta es {{user.perfil.color}}</p>
+			        <p>-->Tu mascota favorita es {{user.perfil.mascota}}</p>
+			        <p><a href="/Inicio/perfil/add/" class="btn btn-primary btn-lg btn-block" role="button">EDITAR PERFIL</a></p>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<script src="{{STATIC_URL}}js/jquery-2.1.0.min.js"></script>
+	<script src="{{STATIC_URL}}js/bootstrap.min.js" ></script>
+</body>
+</html>

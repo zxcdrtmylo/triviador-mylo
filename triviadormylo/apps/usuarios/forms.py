@@ -4,21 +4,22 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import *
+from captcha.fields import ReCaptchaField
 import pdb
 tipos=(('private','Privado'),('public','Publico'),('protected','Protegido'),)
-class comentarios(ModelForm):
-	class Meta:
-		model=comentarios
-		exclude=["Usuarios"]
-class preguntas(ModelForm):
-	class Meta:
-		model=preguntas
+class Captcha(forms.Form):
+    	captcha = ReCaptchaField(attrs={'theme':'clean'})
 
 class fperfil(ModelForm):
 	class Meta:
 		model=Perfil
 		exclude=['user']
 
+class fperfil_modificar(ModelForm):
+	class Meta:
+		model=Perfil
+		exclude=['user']
+		
 class fusuario(UserCreationForm):
 	username=forms.CharField(max_length=40,required=True,help_text=False,label="Nick")
 	password2=forms.CharField(help_text=False,label="Confirmación", widget=forms.PasswordInput)
@@ -36,3 +37,24 @@ class fusuario(UserCreationForm):
 		if commit:
 			user.save()
 		return user
+class ftema(ModelForm):
+	class Meta:
+		model=Tema
+		exclude=['tema']
+
+class fpregunta(ModelForm):
+	nombre=forms.CharField(required=True,label="Pregunta :")
+	class Meta:
+		model=Pregunta
+		exclude=['tema']
+
+class frespuesta(ModelForm):
+	class Meta:
+		model=Respuesta
+		exclude=['pregunta']
+
+class SalaForms(ModelForm):
+	tema=forms.ModelMultipleChoiceField(queryset=Tema.objects.all(), widget=forms.CheckboxSelectMultiple(), required=True)
+	class Meta:
+		model=Sala
+		exclude=["Sala"]
