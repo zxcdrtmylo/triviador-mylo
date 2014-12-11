@@ -35,34 +35,35 @@
 							<div class="alert alert-success" role="alert">Se ha registrado la categoria de preguntas</div>
 						{% endif %}
 						<form action="" method="post">
-						<legend>{{ titulo }}</legend>
+						 	<li class="list-group-item active">{{ titulo }}</li><br>
 							{{formulario.as_p}}
 							{% csrf_token %}
-							<input type="submit" name="benviar" value="Regitrar">
+							<button type="submit" class="btn btn-primary btn-lg">Registrar Tema</button>
 						</form>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-12">
 						<ul class="list-group ">
-							<li class="list-group-item active">Listado de Temas</li>
+						<br>
+							<li class="list-group-item active">LISTADO DE TODOS LOS TEMAS</li>
 							<ul class="nav nav-tabs nav-justified">
 								{% for i in temas %}
-								<li class="list-group-item" role="presentation">
-									<a href=""><span>{{i.nombre}}</span></a>
-								</li>
-								<li role="presentation">
-									<a href="/Inicio/tema/add/{{i.id}}/">Agregar nueva pregunta</a>
-								</li role="presentation">
-								<li role="presentation">
-									<a href="/Inicio/tema/edit/{{i.id}}/">Editar preguntas</a>
-								</li>
-								<span class="badge"></span>
-								</li>
-								<br>	
-								{% empty %}
-								<h3>No existe temas</h3>
-							{% endfor %}
+									<li role="presentation">
+										<a href="" style="color=red">{{i.nombre}}</a>
+									</li>
+									<li role="presentation">
+										<a href="/Inicio/tema/add/{{i.id}}/">Agregar nueva pregunta</a>
+									</li role="presentation">
+									<li role="presentation">
+										<a href="/Inicio/tema/edit/{{i.id}}/">Editar preguntas</a>
+									</li>
+									<span class="badge"></span>
+									</li>
+									<br>	
+									{% empty %}
+										<h3>No existe temas</h3>
+								{% endfor %}
 							</ul>
 						</ul>
 					</div>

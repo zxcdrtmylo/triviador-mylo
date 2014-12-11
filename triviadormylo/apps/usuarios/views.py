@@ -231,4 +231,5 @@ def permisos(request):
 	listapermisos=[]
 	if request.user.has_perm("usuarios.add_tema"):
 		listapermisos.append({"url":"/Inicio/registro/tema/","label":"ADD TEMAS"})
+		
 	return listapermisos

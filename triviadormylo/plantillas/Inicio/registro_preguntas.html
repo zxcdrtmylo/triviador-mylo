@@ -15,7 +15,7 @@
 				{%for item in menu%}
 					<li role="presentation"><a href="{{item.url}}">{{item.label}}</a></li>
 				{%endfor%}
-				<li role="presentation" ><a href="/Inicio/registro/tema/">VER TEMAS</a></li>
+				<li role="presentation" ><a href="/Inicio/registro/tema/">IR A TEMAS</a></li>
 				{% if not user.is_anonymous %}
 					<li role="presentation"><a href="/Inicio/perfil/">PERFIL</a></li>
 				{% endif %}
@@ -34,9 +34,9 @@
 						<div class="alert alert-success" role="alert">Se a registrado la pregunta</div>
 					{% endif %}
 					<form action="" method="post">
-					<legend>{{ titulo }}</legend>
+					<li class="list-group-item active">{{ titulo }}</li><br>
 						{{formulario.as_p}}
-					<legend>{{ titulo2 }}</legend>
+					<li class="list-group-item active">{{ titulo2 }}</li><br>
 					{{formulario2.as_p}}
 						{% csrf_token %}
 						<input type="submit" name="benviar" class="btn btn-primary btn-lg btn-block" value="Regitrar">

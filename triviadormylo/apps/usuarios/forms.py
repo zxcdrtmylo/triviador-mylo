@@ -57,4 +57,4 @@ class SalaForms(ModelForm):
 	tema=forms.ModelMultipleChoiceField(queryset=Tema.objects.all(), widget=forms.CheckboxSelectMultiple(), required=True)
 	class Meta:
 		model=Sala
-		exclude=["Sala"]
+		exclude=["usuario"]
